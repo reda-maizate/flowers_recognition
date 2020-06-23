@@ -1,0 +1,48 @@
+{% extends 'headerPage.html' %}
+
+
+  <!-- TODO:
+            - Lower the form and put it at the middle of the div
+            - Divise the task of the PredictImage on smaller functions
+       DONE:
+            - Put an image placeholder (250x250)
+  -->
+
+
+
+{% block content%}
+  <div class="jumbotron text-center" id="myJumbotron" style="background-color:white">
+    <h2 style='color:green'>Deep Learning to predict flower type.</h2>
+  </div>
+
+
+  <div class="container" id="Container1">
+    <div class="row">
+      <div class="col-sm-5 text-center d-flex align-items-center" id="FileUpload">
+        <form method="post" enctype="multipart/form-data" action="predictImage">
+          <label for="fname">Upload your flower image</label>
+          {% csrf_token %}
+
+          <div class="d-flex align-items-center">
+            <div class="input-group" style="margin:auto;">
+              <input class="btn btn-secondary" name="filePath" type="file">
+            </div>
+          </div>
+
+
+
+          <input class="btn btn-primary" type="submit" value="Submit">
+      </div>
+      <div class="col-sm-5 text-center" id="Submit">
+          <p><strong>The flower in your file is: {{prediction_label}}</strong></p>
+          <img src={{image}} alt='picture' height='250px' weight='250px'>
+          <br>
+          <p><strong>Prediction accuracy: {{prediction_score}}%</strong></p>
+          <p><i>Labels available: {{labels}}</i></p>
+          <p><i>Scores: {{scores}}</i></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
